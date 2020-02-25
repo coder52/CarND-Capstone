@@ -19,6 +19,7 @@ class TLDetector(object):
         rospy.init_node('tl_detector')
 
         self.waypoint_tree = None
+        self.waypoints_2d = None
 
         self.pose = None
         self.waypoints = None
@@ -59,8 +60,9 @@ class TLDetector(object):
 
     def waypoints_cb(self, waypoints):
         self.waypoints = waypoints
-        waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]
-        self.waypoint_tree = KDTree( waypoints_2d )
+        if not self.waypoints_2d:
+            self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]
+            self.waypoint_tree = KDTree( self.waypoints_2d )
 
 
     def traffic_cb(self, msg):

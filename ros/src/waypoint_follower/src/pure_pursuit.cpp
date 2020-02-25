@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   ros::NodeHandle private_nh("~");
 
   bool linear_interpolate_mode;
-  private_nh.param("linear_interpolate_mode", linear_interpolate_mode, bool(true));
+  private_nh.param("linear_interpolate_mode", linear_interpolate_mode, bool(false));
   ROS_INFO_STREAM("linear_interpolate_mode : " << linear_interpolate_mode);
 
   waypoint_follower::PurePursuit pp(linear_interpolate_mode);
